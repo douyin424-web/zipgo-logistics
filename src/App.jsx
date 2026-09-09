@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import StatsBar from './components/StatsBar';
@@ -23,43 +23,76 @@ export default function App() {
   const handleOpenGetApp = () => setIsGetAppOpen(true);
   const handleCloseGetApp = () => setIsGetAppOpen(false);
 
+  // Global scroll observer for smooth animation across all sections
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+
+    const elements = document.querySelectorAll('.scroll-reveal');
+    elements.forEach((el) => observer.observe(el));
+
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <div className="min-h-screen bg-white text-slate-900 font-sans selection:bg-blue-600 selection:text-white">
       
-      {/* Navigation Header (White Header from Image 1) */}
+      {/* Navigation Header */}
       <Navbar onOpenContact={handleOpenContact} onOpenGetApp={handleOpenGetApp} />
 
-      {/* Main Content Sections */}
+      {/* Main Content Sections with Animations */}
       <main>
-        {/* Hero Section (Light Background from Image 1) */}
+        {/* Hero Section */}
         <Hero onOpenContact={handleOpenContact} onOpenGetApp={handleOpenGetApp} />
 
-        {/* 3 Solutions Card Ribbon (Dark Navy Blue from Image 1 & 3) */}
-        <Solutions onOpenContact={handleOpenContact} />
+        {/* 3 Solutions Card Ribbon */}
+        <div className="scroll-reveal">
+          <Solutions onOpenContact={handleOpenContact} />
+        </div>
 
-        {/* Key Metrics Stats Bar (Light background from Image 1) */}
-        <StatsBar />
+        {/* Key Metrics Stats Bar */}
+        <div className="scroll-reveal">
+          <StatsBar />
+        </div>
 
-        {/* How ZipGo Works (5-Step Diagram from Image 1) */}
-        <HowItWorks />
+        {/* How ZipGo Works (5-Step Diagram) */}
+        <div className="scroll-reveal">
+          <HowItWorks />
+        </div>
 
         {/* The Math is the Pitch / Cost Comparison */}
-        <CostComparison onOpenContact={handleOpenContact} />
+        <div className="scroll-reveal">
+          <CostComparison onOpenContact={handleOpenContact} />
+        </div>
 
         {/* Interactive Volume Rate & Savings Calculator */}
-        <RateCalculator onOpenContact={handleOpenContact} />
+        <div className="scroll-reveal">
+          <RateCalculator onOpenContact={handleOpenContact} />
+        </div>
 
-        {/* Why Businesses Choose ZipGo & App Download Showcase (Image 1) */}
-        <AppDownload onOpenGetApp={handleOpenGetApp} />
+        {/* Why Businesses Choose ZipGo & App Download Showcase */}
+        <div className="scroll-reveal">
+          <AppDownload onOpenGetApp={handleOpenGetApp} />
+        </div>
 
-        {/* Client Testimonials (Foodpanda, Daraz, Careem from Image 1) */}
-        <Testimonials />
+        {/* Client Testimonials */}
+        <div className="scroll-reveal">
+          <Testimonials />
+        </div>
 
-        {/* Leadership / Partners Section */}
+        {/* Leadership / Partners Section (CEO #1, General Partner #2, CTO #3) */}
         <Partners />
       </main>
 
-      {/* Dark Navy Footer (Image 1) */}
+      {/* Dark Navy Footer */}
       <Footer onOpenContact={handleOpenContact} onOpenGetApp={handleOpenGetApp} />
 
       {/* Interactive Sales Inquiry Modal */}
