@@ -8,6 +8,7 @@ import CostComparison from './components/CostComparison';
 import RateCalculator from './components/RateCalculator';
 import AppDownload from './components/AppDownload';
 import Testimonials from './components/Testimonials';
+import Partners from './components/Partners';
 import Footer from './components/Footer';
 import ContactModal from './components/ContactModal';
 import GetAppModal from './components/GetAppModal';
@@ -53,6 +54,9 @@ export default function App() {
 
         {/* Client Testimonials (Foodpanda, Daraz, Careem from Image 1) */}
         <Testimonials />
+
+        {/* Leadership / Partners Section */}
+        <Partners />
       </main>
 
       {/* Dark Navy Footer (Image 1) */}
