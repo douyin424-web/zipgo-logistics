@@ -89,7 +89,7 @@ export default function Partners() {
       delay: 0,
     },
     {
-      image: '/partner-nasrullah.jpg',
+      image: '/partner-nasrullah.png',
       name: 'Muhammad Nasrullah',
       role: 'General Partner, ZipGo Logistics',
       tag: 'General Partner',
