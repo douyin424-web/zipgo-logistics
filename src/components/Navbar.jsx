@@ -21,26 +21,18 @@ export default function Navbar({ onOpenContact, onOpenGetApp }) {
 
   return (
     <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 animate-fade-in-down ${
-      isScrolled ? 'bg-white/95 backdrop-blur-md shadow-md py-2 border-b border-slate-200' : 'bg-white py-3 border-b border-slate-100'
+      isScrolled ? 'bg-white/95 backdrop-blur-md shadow-md py-2.5 border-b border-slate-200' : 'bg-white py-3.5 border-b border-slate-100'
     }`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between">
           
-          {/* Logo with User's Exact 3D Metallic ZipGo Brandmark */}
+          {/* Logo Container - Clean, Prominent & High Resolution */}
           <a href="#" className="flex items-center gap-3 group">
             <img 
               src="/zipgo-logo.png" 
-              alt="ZipGo Logistics" 
-              className="h-10 sm:h-11 w-auto object-contain group-hover:scale-105 transition-transform drop-shadow-sm"
+              alt="ZipGo" 
+              className="h-11 sm:h-12 w-auto max-w-[150px] sm:max-w-[170px] object-contain group-hover:scale-105 transition-transform"
             />
-            <div className="hidden sm:flex flex-col border-l border-slate-200 pl-3">
-              <span className="text-[10px] text-blue-600 font-extrabold uppercase tracking-widest leading-tight">
-                Logistics Pakistan
-              </span>
-              <span className="text-[9px] text-slate-400 font-medium">
-                100% EV Electric Fleet
-              </span>
-            </div>
           </a>
 
           {/* Desktop Navigation Links */}
