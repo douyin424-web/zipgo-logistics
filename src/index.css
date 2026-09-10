@@ -98,32 +98,82 @@
   }
 }
 
-/* Zayn-style Logo Pulse & Glow Keyframes */
-@keyframes logoGlow {
-  0%, 100% {
-    filter: drop-shadow(0 0 6px rgba(59, 130, 246, 0.45)) drop-shadow(0 0 15px rgba(16, 185, 129, 0.3));
-    transform: scale(1);
+/* ==========================================================================
+   DEVELOPER SPEC: Clean, Premium Soft Cyan/Blue Light Sweep Animation
+   - Original PNG logo intact (no resize, no zoom, no distortion, no rotate)
+   - Soft cyan/blue beam smoothly sweeps across logo (2.6s cycle)
+   - Subtle premium EV energy glow during sweep
+   - Seamless loop back to crisp original state
+   ========================================================================== */
+@keyframes lightSweepBeam {
+  0% {
+    transform: translateX(-160%) skewX(-24deg);
+    opacity: 0;
+  }
+  15% {
+    opacity: 0.65;
   }
   50% {
-    filter: drop-shadow(0 0 16px rgba(59, 130, 246, 0.85)) drop-shadow(0 0 28px rgba(16, 185, 129, 0.55));
-    transform: scale(1.03);
+    transform: translateX(180%) skewX(-24deg);
+    opacity: 0.85;
+  }
+  70% {
+    opacity: 0;
+    transform: translateX(200%) skewX(-24deg);
+  }
+  100% {
+    transform: translateX(200%) skewX(-24deg);
+    opacity: 0;
   }
 }
 
-@keyframes shimmerEffect {
-  0% {
-    background-position: -200% 0;
+@keyframes logoSoftPulse {
+  0%, 100% {
+    filter: drop-shadow(0 0 0px transparent);
   }
-  100% {
-    background-position: 200% 0;
+  28% {
+    filter: drop-shadow(0 0 8px rgba(56, 189, 248, 0.45)) drop-shadow(0 0 16px rgba(37, 99, 235, 0.3));
   }
+  55% {
+    filter: drop-shadow(0 0 12px rgba(56, 189, 248, 0.55)) drop-shadow(0 0 20px rgba(16, 185, 129, 0.25));
+  }
+  75% {
+    filter: drop-shadow(0 0 3px rgba(56, 189, 248, 0.15));
+  }
+}
+
+.logo-light-sweep-container {
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
+  border-radius: 0.5rem;
+}
+
+.logo-light-sweep-container img {
+  animation: logoSoftPulse 2.8s ease-in-out infinite;
+  display: block;
+}
+
+.logo-light-sweep-beam {
+  position: absolute;
+  top: -20%;
+  left: 0;
+  width: 45%;
+  height: 140%;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(56, 189, 248, 0.18) 25%,
+    rgba(255, 255, 255, 0.55) 50%,
+    rgba(34, 211, 238, 0.28) 75%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  pointer-events: none;
+  mix-blend-mode: overlay;
+  animation: lightSweepBeam 2.8s cubic-bezier(0.4, 0, 0.2, 1) infinite;
 }
 
 /* Animation utility classes */
-.animate-logo-glow {
-  animation: logoGlow 3.5s ease-in-out infinite;
-}
-
 .animate-fade-in-down {
   animation: fadeInDown 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
 }

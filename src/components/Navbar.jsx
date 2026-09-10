@@ -26,17 +26,16 @@ export default function Navbar({ onOpenContact, onOpenGetApp }) {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between">
           
-          {/* Logo Container - Larger, Animated Zayn-style Electric Glow Logo */}
-          <a href="#" className="flex items-center gap-3 group relative py-1">
-            <div className="relative">
-              {/* Electric ambient glow behind logo */}
-              <div className="absolute -inset-1 bg-gradient-to-r from-blue-600 to-emerald-500 rounded-full blur-md opacity-40 group-hover:opacity-80 transition duration-500 pointer-events-none" />
-              
+          {/* Logo with Developer Spec: Soft Blue/Cyan Light Sweep Animation */}
+          <a href="#" className="flex items-center group py-0.5">
+            <div className="logo-light-sweep-container">
               <img 
                 src="/zipgo-logo.png" 
                 alt="ZipGo Logistics" 
-                className="relative h-12 sm:h-14 md:h-16 w-auto max-w-[170px] sm:max-w-[210px] object-contain animate-logo-glow transition-transform duration-500 group-hover:scale-110"
+                className="h-11 sm:h-12 md:h-14 w-auto max-w-[170px] sm:max-w-[210px] object-contain"
               />
+              {/* Soft electric blue/cyan light sweep beam */}
+              <div className="logo-light-sweep-beam" />
             </div>
           </a>
 

@@ -79,18 +79,16 @@ export default function Footer({ onOpenContact, onOpenGetApp }) {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10">
           
-          {/* Col 1: Brand Info with Animated Larger Logo */}
+          {/* Col 1: Brand Info with Clean Light Sweep Logo */}
           <div className="lg:col-span-2 space-y-5">
             <div className="flex items-center gap-4">
-              <div className="relative group">
-                <div className="absolute -inset-1 bg-gradient-to-r from-blue-600 to-emerald-500 rounded-2xl blur-sm opacity-40 group-hover:opacity-75 transition duration-500" />
-                <div className="relative bg-black/60 p-3 rounded-2xl border border-zinc-800">
-                  <img 
-                    src="/zipgo-logo.png" 
-                    alt="ZipGo Logistics Pakistan" 
-                    className="h-12 sm:h-14 w-auto object-contain animate-logo-glow"
-                  />
-                </div>
+              <div className="logo-light-sweep-container bg-black/60 p-2.5 rounded-2xl border border-zinc-800">
+                <img 
+                  src="/zipgo-logo.png" 
+                  alt="ZipGo Logistics Pakistan" 
+                  className="h-11 sm:h-12 w-auto object-contain"
+                />
+                <div className="logo-light-sweep-beam" />
               </div>
               <div className="flex flex-col">
                 <span className="text-sm font-extrabold text-white tracking-wide uppercase">
