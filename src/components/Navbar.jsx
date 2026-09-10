@@ -21,27 +21,24 @@ export default function Navbar({ onOpenContact, onOpenGetApp }) {
 
   return (
     <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 animate-fade-in-down ${
-      isScrolled ? 'bg-white/95 backdrop-blur-md shadow-md py-2.5 border-b border-slate-200' : 'bg-white py-3.5 border-b border-slate-100'
+      isScrolled ? 'bg-white/95 backdrop-blur-md shadow-md py-2 border-b border-slate-200' : 'bg-white py-3 border-b border-slate-100'
     }`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between">
           
-          {/* Logo with Gemini Generated Brandmark */}
-          <a href="#" className="flex items-center gap-2.5 group">
+          {/* Logo with User's Exact 3D Metallic ZipGo Brandmark */}
+          <a href="#" className="flex items-center gap-3 group">
             <img 
               src="/zipgo-logo.png" 
-              alt="ZipGo Logistics Pakistan Logo" 
-              className="w-10 h-10 object-contain rounded-lg group-hover:scale-105 transition-transform"
+              alt="ZipGo Logistics" 
+              className="h-10 sm:h-11 w-auto object-contain group-hover:scale-105 transition-transform drop-shadow-sm"
             />
-            <div className="flex flex-col">
-              <div className="flex items-center gap-1 leading-none">
-                <span className="font-heading font-black text-2xl tracking-tight text-slate-900">
-                  ZIP<span className="text-blue-600">GO</span>
-                </span>
-                <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-              </div>
-              <span className="text-[9px] text-slate-500 font-semibold tracking-wider uppercase mt-0.5">
+            <div className="hidden sm:flex flex-col border-l border-slate-200 pl-3">
+              <span className="text-[10px] text-blue-600 font-extrabold uppercase tracking-widest leading-tight">
                 Logistics Pakistan
+              </span>
+              <span className="text-[9px] text-slate-400 font-medium">
+                100% EV Electric Fleet
               </span>
             </div>
           </a>
@@ -76,6 +73,7 @@ export default function Navbar({ onOpenContact, onOpenGetApp }) {
             <a href="#pricing" className="hover:text-blue-600 transition-colors">Pricing</a>
             <a href="#why-ev" className="hover:text-blue-600 transition-colors">About Us</a>
             <a href="#testimonials" className="hover:text-blue-600 transition-colors">Clients</a>
+            <a href="#partners" className="hover:text-blue-600 transition-colors">Team</a>
 
             {/* Resources Dropdown */}
             <div className="relative" onMouseEnter={() => setResourcesOpen(true)} onMouseLeave={() => setResourcesOpen(false)}>
@@ -123,6 +121,7 @@ export default function Navbar({ onOpenContact, onOpenGetApp }) {
           <a href="#pricing" onClick={() => setMobileMenuOpen(false)} className="block text-slate-800 font-semibold py-2">Pricing</a>
           <a href="#why-ev" onClick={() => setMobileMenuOpen(false)} className="block text-slate-800 font-semibold py-2">About Us</a>
           <a href="#testimonials" onClick={() => setMobileMenuOpen(false)} className="block text-slate-800 font-semibold py-2">Clients</a>
+          <a href="#partners" onClick={() => setMobileMenuOpen(false)} className="block text-slate-800 font-semibold py-2">Team</a>
           <a href="#how-it-works" onClick={() => setMobileMenuOpen(false)} className="block text-slate-800 font-semibold py-2">Resources</a>
           
           <div className="pt-3 border-t border-slate-100 flex flex-col gap-2">

@@ -79,20 +79,22 @@ export default function Footer({ onOpenContact, onOpenGetApp }) {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10">
           
-          {/* Col 1: Brand Info with Logo */}
+          {/* Col 1: Brand Info with Exact Logo */}
           <div className="lg:col-span-2 space-y-4">
             <div className="flex items-center gap-3">
-              <img 
-                src="/zipgo-logo.png" 
-                alt="ZipGo Logistics Pakistan" 
-                className="w-10 h-10 object-contain rounded-lg bg-white p-0.5"
-              />
+              <div className="bg-white/10 p-2 rounded-xl border border-white/10">
+                <img 
+                  src="/zipgo-logo.png" 
+                  alt="ZipGo Logistics Pakistan" 
+                  className="h-9 w-auto object-contain"
+                />
+              </div>
               <div className="flex flex-col">
-                <span className="font-heading font-extrabold text-2xl tracking-tight text-white leading-none">
-                  ZIP<span className="text-blue-500">GO</span>
+                <span className="text-xs text-blue-400 font-extrabold uppercase tracking-widest leading-tight">
+                  ZipGo Logistics
                 </span>
-                <span className="text-[9px] text-slate-400 uppercase tracking-widest font-semibold mt-0.5">
-                  Logistics Pakistan
+                <span className="text-[10px] text-slate-400 font-semibold mt-0.5">
+                  Pakistan Premier EV Network
                 </span>
               </div>
             </div>
@@ -132,9 +134,9 @@ export default function Footer({ onOpenContact, onOpenGetApp }) {
           <div className="space-y-3">
             <h4 className="text-xs font-bold text-white uppercase tracking-wider">Company</h4>
             <ul className="space-y-2 text-xs text-slate-400">
-              <li><a href="#" className="hover:text-white transition-colors">About Us</a></li>
+              <li><a href="#why-ev" className="hover:text-white transition-colors">About Us</a></li>
+              <li><a href="#partners" className="hover:text-white transition-colors">Leadership Team</a></li>
               <li><a href="#" className="hover:text-white transition-colors">Careers</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Blog</a></li>
               <li><button onClick={onOpenContact} className="hover:text-white transition-colors">Contact Us</button></li>
             </ul>
           </div>
