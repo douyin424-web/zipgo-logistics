@@ -19,14 +19,14 @@
   width: 8px;
 }
 ::-webkit-scrollbar-track {
-  background: #F8FAFC;
+  background: #000000;
 }
 ::-webkit-scrollbar-thumb {
-  background: #1D4ED8;
+  background: #2563EB;
   border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #2563EB;
+  background: #3B82F6;
 }
 
 /* Smooth Entrance Keyframes */
@@ -52,10 +52,10 @@
   }
 }
 
-@keyframes fadeInRight {
+@keyframes fadeInLeft {
   from {
     opacity: 0;
-    transform: translateX(40px);
+    transform: translateX(-40px);
   }
   to {
     opacity: 1;
@@ -63,10 +63,10 @@
   }
 }
 
-@keyframes fadeInLeft {
+@keyframes fadeInRight {
   from {
     opacity: 0;
-    transform: translateX(-40px);
+    transform: translateX(40px);
   }
   to {
     opacity: 1;
@@ -98,7 +98,32 @@
   }
 }
 
+/* Zayn-style Logo Pulse & Glow Keyframes */
+@keyframes logoGlow {
+  0%, 100% {
+    filter: drop-shadow(0 0 6px rgba(59, 130, 246, 0.45)) drop-shadow(0 0 15px rgba(16, 185, 129, 0.3));
+    transform: scale(1);
+  }
+  50% {
+    filter: drop-shadow(0 0 16px rgba(59, 130, 246, 0.85)) drop-shadow(0 0 28px rgba(16, 185, 129, 0.55));
+    transform: scale(1.03);
+  }
+}
+
+@keyframes shimmerEffect {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
 /* Animation utility classes */
+.animate-logo-glow {
+  animation: logoGlow 3.5s ease-in-out infinite;
+}
+
 .animate-fade-in-down {
   animation: fadeInDown 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
