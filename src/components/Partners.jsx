@@ -30,13 +30,13 @@ function PartnerCard({ image, name, role, tag, bio, icon: Icon, delay = 0, initi
     >
       <div>
         {/* Photo Area */}
-        <div className="relative bg-slate-50 h-72 overflow-hidden flex items-end justify-center">
-          <div className="absolute inset-0 bg-gradient-to-t from-slate-100 to-transparent opacity-30 pointer-events-none" />
+        <div className="relative bg-white h-72 overflow-hidden flex items-end justify-center">
+          <div className="absolute inset-0 bg-gradient-to-t from-slate-50 to-transparent opacity-20 pointer-events-none" />
           {image ? (
             <img
               src={image}
               alt={name}
-              className="h-full w-full object-cover object-top group-hover:scale-105 transition-transform duration-700"
+              className="h-full w-full object-contain object-bottom group-hover:scale-105 transition-transform duration-700"
             />
           ) : (
             <div className="w-full h-full bg-gradient-to-br from-slate-100 to-slate-200 flex items-center justify-center">
