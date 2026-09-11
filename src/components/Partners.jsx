@@ -124,8 +124,8 @@ export default function Partners() {
     {
       image: '/partner-eman.jpg',
       name: 'Eman Anjum',
-      role: 'CEO & Co-Founder',
-      tag: 'CEO & Co-Founder',
+      role: 'CEO & Founder',
+      tag: 'CEO & Founder',
       icon: Users,
       bio: 'Entrepreneur and logistics innovator building Pakistan\'s most trusted EV delivery network from the ground up.',
       delay: 0,
