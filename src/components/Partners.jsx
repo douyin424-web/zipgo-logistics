@@ -122,10 +122,10 @@ export default function Partners() {
   // ORDER: 1=CEO, 2=General Partner (Muhammad Nasrullah with exact profile links), 3=CTO
   const partners = [
     {
-      image: '/partner-eman.jpg',
+      image: '/partner-eman.png',
       name: 'Eman Anjum',
-      role: 'CEO & Founder',
-      tag: 'CEO & Founder',
+      role: 'Founder & CEO',
+      tag: 'Founder & CEO',
       icon: Users,
       bio: 'Entrepreneur and logistics innovator building Pakistan\'s most trusted EV delivery network from the ground up.',
       delay: 0,
