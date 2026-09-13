@@ -6,23 +6,20 @@ export default function Testimonials() {
     {
       quote: "ZipGo has transformed our delivery operations. Their reliability and real-time tracking help us serve our customers better every day.",
       author: "Hamza Ali",
-      company: "Foodpanda Pakistan",
-      brandColor: "bg-pink-50 text-pink-600 border-pink-200",
-      logoText: "foodpanda"
+      company: "Easy Bite",
+      logo: "/client-easybite.jpg",
     },
     {
       quote: "The volume-based pricing and smooth dashboard make ZipGo our trusted logistics partner for nationwide deliveries.",
       author: "Zainab Khan",
-      company: "Daraz Seller",
-      brandColor: "bg-orange-50 text-orange-600 border-orange-200",
-      logoText: "Daraz"
+      company: "Zainab Boutique",
+      logo: "/client-zainab.jpg",
     },
     {
       quote: "Professional, fast and transparent. ZipGo's courier service is exactly what our business needed.",
       author: "Usman Tariq",
-      company: "Careem Business",
-      brandColor: "bg-emerald-50 text-emerald-600 border-emerald-200",
-      logoText: "Careem"
+      company: "Lahore Couriers Service",
+      logo: "/client-lahore.jpg",
     }
   ];
 
@@ -57,9 +54,13 @@ export default function Testimonials() {
                   <div className="text-[11px] text-slate-400 font-medium">{rev.company}</div>
                 </div>
 
-                {/* Client Logo Brand Badge */}
-                <div className={`px-3 py-1 rounded-xl text-xs font-black border tracking-tight ${rev.brandColor}`}>
-                  {rev.logoText}
+                {/* Client Logo Image */}
+                <div className="h-10 w-20 flex items-center justify-center overflow-hidden rounded-xl bg-slate-50 border border-slate-100 p-1">
+                  <img
+                    src={rev.logo}
+                    alt={rev.company}
+                    className="h-full w-full object-contain"
+                  />
                 </div>
               </div>
             </div>
