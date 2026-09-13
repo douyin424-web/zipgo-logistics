@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://zipgo-logistics.vercel.app/sitemap.xml
+Sitemap: https://zipgologistics.pro/sitemap.xml
