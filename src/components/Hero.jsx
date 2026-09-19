@@ -18,15 +18,11 @@ export default function Hero({ onOpenContact, onOpenGetApp }) {
               <span>#1 Delivery Platform in Pakistan</span>
             </div>
 
-            {/* Main Headline */}
-            <div className="space-y-1">
-              <h1 className="text-3xl sm:text-5xl font-heading font-black tracking-tight text-slate-900 leading-tight">
-                A Delivery Partner
-              </h1>
-              <h1 className="text-3xl sm:text-5xl font-heading font-black tracking-tight leading-tight">
-                You Can <span className="text-blue-600 underline decoration-blue-200 underline-offset-4">Rely On</span>
-              </h1>
-            </div>
+            {/* Main Headline (Single H1 for strict Google SEO compliance) */}
+            <h1 className="text-3xl sm:text-5xl font-heading font-black tracking-tight text-slate-900 leading-tight">
+              A Delivery Partner <br className="hidden sm:inline" />
+              You Can <span className="text-blue-600 underline decoration-blue-200 underline-offset-4">Rely On</span>
+            </h1>
             
             <p className="text-sm text-slate-600 leading-relaxed max-w-md">
               Technology, transparency and trust at the core of every delivery we make.

@@ -10,7 +10,9 @@ export default function CostComparison({ onOpenContact }) {
   const percentageSaved = Math.round(((petrolCost - evCost) / petrolCost) * 100);
 
   return (
-    <section id="why-ev" className="py-24 bg-slate-50 text-slate-900 border-t border-slate-200">
+    <section id="about-us" className="py-24 bg-slate-50 text-slate-900 border-t border-slate-200 relative">
+      {/* Anchor for backward compatibility */}
+      <span id="why-ev" className="absolute -top-24" />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
@@ -98,17 +100,20 @@ export default function CostComparison({ onOpenContact }) {
             </div>
           </div>
 
-          {/* Right Column: Copy & Value Pillars (Image 4 exact) */}
+          {/* Right Column: Copy & Value Pillars */}
           <div className="lg:col-span-6 space-y-8">
-            <div className="space-y-3">
-              <span className="text-xs font-bold text-blue-600 bg-blue-50 px-3 py-1 rounded-full uppercase">
-                The Core EV Advantage
+            <div className="space-y-4">
+              <span className="text-xs font-bold text-blue-600 bg-blue-50 px-3 py-1.5 rounded-full uppercase border border-blue-100 inline-block">
+                About ZipGo • Commercial Fleet
               </span>
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-heading font-black text-slate-900 tracking-tight leading-tight">
-                The math is the pitch
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-heading font-black text-slate-900 tracking-tight leading-tight">
+                Pakistan's First Electric Delivery Fleet for Restaurants & Ecommerce
               </h2>
-              <p className="text-base text-slate-600">
-                Electric isn't a sustainability slide here — it's the reason the pricing works.
+              <div className="text-xs sm:text-sm font-bold text-blue-600 uppercase tracking-wide">
+                The math is the pitch — 90%+ Cost Cut
+              </div>
+              <p className="text-sm sm:text-base text-slate-600 leading-relaxed">
+                ZipGo operates Pakistan's premier <strong>electric delivery fleet in Lahore</strong>. Our commercial <strong>EV delivery service in Pakistan</strong> cuts per-kilometer fuel expenses by over 90% while ensuring 100% salaried riders, digital live tracking, and guaranteed on-time delivery for high-volume brands.
               </p>
             </div>
 

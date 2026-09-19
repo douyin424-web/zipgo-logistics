@@ -67,7 +67,7 @@ export default function Navbar({ onOpenContact, onOpenGetApp }) {
             </div>
 
             <a href="#pricing" className="hover:text-white transition-colors">Pricing</a>
-            <a href="#why-ev" className="hover:text-white transition-colors">About Us</a>
+            <a href="#about-us" className="hover:text-white transition-colors">About Us</a>
             <a href="#testimonials" className="hover:text-white transition-colors">Clients</a>
             <a href="#partners" className="hover:text-white transition-colors">Team</a>
 
@@ -81,7 +81,7 @@ export default function Navbar({ onOpenContact, onOpenGetApp }) {
                 <div className="absolute top-full left-0 w-52 bg-zinc-950 border border-zinc-800 rounded-2xl shadow-2xl p-2 space-y-1 animate-fade-in-down">
                   <a href="#how-it-works" className="block px-3 py-2 rounded-xl hover:bg-zinc-900 text-xs font-semibold text-zinc-200">Help Center</a>
                   <a href="#how-it-works" className="block px-3 py-2 rounded-xl hover:bg-zinc-900 text-xs font-semibold text-zinc-200">API Documentation</a>
-                  <a href="#pricing" className="block px-3 py-2 rounded-xl hover:bg-zinc-900 text-xs font-semibold text-zinc-200">Rate Cards</a>
+                  <a href="#rate-cards" className="block px-3 py-2 rounded-xl hover:bg-zinc-900 text-xs font-semibold text-zinc-200">Rate Cards</a>
                 </div>
               )}
             </div>
@@ -115,7 +115,7 @@ export default function Navbar({ onOpenContact, onOpenGetApp }) {
         <div className="md:hidden bg-black border-b border-zinc-800 px-4 pt-4 pb-6 space-y-3 animate-fade-in-down text-zinc-200">
           <a href="#solutions" onClick={() => setMobileMenuOpen(false)} className="block font-semibold py-2 hover:text-white">Solutions</a>
           <a href="#pricing" onClick={() => setMobileMenuOpen(false)} className="block font-semibold py-2 hover:text-white">Pricing</a>
-          <a href="#why-ev" onClick={() => setMobileMenuOpen(false)} className="block font-semibold py-2 hover:text-white">About Us</a>
+          <a href="#about-us" onClick={() => setMobileMenuOpen(false)} className="block font-semibold py-2 hover:text-white">About Us</a>
           <a href="#testimonials" onClick={() => setMobileMenuOpen(false)} className="block font-semibold py-2 hover:text-white">Clients</a>
           <a href="#partners" onClick={() => setMobileMenuOpen(false)} className="block font-semibold py-2 hover:text-white">Team</a>
           <a href="#how-it-works" onClick={() => setMobileMenuOpen(false)} className="block font-semibold py-2 hover:text-white">Resources</a>
