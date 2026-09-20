@@ -21,7 +21,7 @@ export function useScrollAnimation(delay = 0) {
   return ref;
 }
 
-function PartnerCard({ image, name, role, tag, bio, icon: Icon, delay = 0, initials, linkedin, twitter, email }) {
+function PartnerCard({ image, name, role, tag, bio, icon: Icon, delay = 0, initials, linkedin, twitter, email, objectFit = 'object-contain object-bottom' }) {
   const ref = useScrollAnimation(delay);
   return (
     <div
@@ -36,7 +36,7 @@ function PartnerCard({ image, name, role, tag, bio, icon: Icon, delay = 0, initi
             <img
               src={image}
               alt={name}
-              className="h-full w-full object-contain object-bottom group-hover:scale-105 transition-transform duration-700"
+              className={`h-full w-full ${objectFit} group-hover:scale-105 transition-transform duration-700`}
             />
           ) : (
             <div className="w-full h-full bg-gradient-to-br from-slate-100 to-slate-200 flex items-center justify-center">
@@ -146,8 +146,8 @@ export default function Partners() {
       email: 'muhammadnasrullah57109973@gmail.com',
     },
     {
-      image: null,
-      initials: 'UF',
+      image: '/partner-umar.jpg',
+      objectFit: 'object-cover object-top',
       name: 'Umar Farooq',
       role: 'Chief Technology Officer',
       tag: 'CTO',
