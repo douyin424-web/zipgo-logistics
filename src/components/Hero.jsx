@@ -148,39 +148,6 @@ export default function Hero({ onOpenContact, onOpenGetApp }) {
               </div>
             </div>
 
-            {/* Floating "Today's Performance" Card - Fixed mobile positioning */}
-            <div className="relative -mt-10 sm:mt-0 sm:absolute sm:-bottom-4 sm:right-0 z-20 w-[92%] sm:w-64 bg-white/95 backdrop-blur-md rounded-2xl p-4 sm:p-5 border border-slate-200 shadow-2xl space-y-2.5 sm:space-y-3 animate-float">
-              <div className="flex items-start justify-between pb-2 border-b border-slate-100">
-                <div>
-                  <h3 className="text-xs font-bold text-slate-900">Today's Performance</h3>
-                  <p className="text-[10px] text-slate-400 mt-0.5">Wednesday, 21 May 2025</p>
-                </div>
-              </div>
-
-              <div className="grid grid-cols-3 gap-2 text-center">
-                <div>
-                  <span className="text-[10px] text-slate-500 font-medium block">Delivered</span>
-                  <span className="text-base sm:text-lg font-heading font-extrabold text-slate-900 block leading-tight">248</span>
-                </div>
-                <div className="border-x border-slate-100">
-                  <span className="text-[10px] text-slate-500 font-medium block">On-Time</span>
-                  <span className="text-base sm:text-lg font-heading font-extrabold text-blue-600 block leading-tight">97.6%</span>
-                </div>
-                <div>
-                  <span className="text-[10px] text-slate-500 font-medium block">Earnings</span>
-                  <span className="text-xs sm:text-sm font-heading font-extrabold text-slate-900 block leading-tight mt-0.5">PKR 48,760</span>
-                </div>
-              </div>
-
-              <button
-                onClick={onOpenContact}
-                className="text-[11px] sm:text-xs text-blue-600 hover:text-blue-700 font-semibold flex items-center gap-1 w-full justify-center sm:justify-start"
-              >
-                <span>View Full Report</span>
-                <span>→</span>
-              </button>
-            </div>
-
           </div>
 
         </div>
