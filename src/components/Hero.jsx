@@ -9,78 +9,124 @@ export default function Hero({ onOpenContact, onOpenGetApp }) {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center min-h-[500px]">
           
-          {/* ===== LEFT TEXT CONTENT ===== */}
+          {/* ===== LEFT TEXT CONTENT (EXACT MOCKUP) ===== */}
           <div className="lg:col-span-6 pt-6 sm:pt-10 pb-4 sm:pb-8 space-y-5 sm:space-y-6 z-10 relative animate-fade-in-left">
             
             {/* Top Pill Badge */}
-            <div className="inline-flex items-center gap-2 text-xs font-bold text-blue-700 animate-fade-in-down delay-100">
-              <span className="w-2 h-2 rounded-full bg-blue-600 animate-ping" />
-              <span>#1 Delivery Platform in Pakistan</span>
+            <div className="inline-flex items-center gap-2 text-xs font-bold text-blue-600 animate-fade-in-down delay-100">
+              <span className="w-2 h-2 rounded-full bg-blue-600 animate-pulse" />
+              <span>#1 EV Delivery Platform in Pakistan</span>
             </div>
 
-            {/* Main Headline (Single H1 for strict Google SEO compliance) */}
-            <h1 className="text-3xl sm:text-5xl font-heading font-black tracking-tight text-slate-900 leading-tight">
-              A Delivery Partner <br className="hidden sm:inline" />
-              You Can <span className="text-blue-600 underline decoration-blue-200 underline-offset-4">Rely On</span>
+            {/* Main Headline (Single H1 for Google SEO) */}
+            <h1 className="text-3xl sm:text-4xl lg:text-[42px] font-heading font-black tracking-tight text-slate-900 leading-[1.18]">
+              Delivery for Restaurants, <br />
+              SMEs & E-commerce — <br />
+              <span className="text-blue-600">Powered Entirely by EV</span>
             </h1>
             
-            <p className="text-sm text-slate-600 leading-relaxed max-w-md">
-              Technology, transparency and trust at the core of every delivery we make.
+            {/* Subparagraph */}
+            <p className="text-sm sm:text-[15px] text-slate-600 leading-relaxed max-w-lg">
+              Lahore's first commercial EV delivery fleet, with <strong className="text-slate-900 font-bold">100% salaried riders</strong> — <span className="text-slate-500">not gig workers</span> — and live tracking on every order.
             </p>
 
-            {/* 3 Feature Bullets */}
-            <div className="space-y-2.5 pt-1">
-              <div className="flex items-start gap-3 p-2 rounded-xl hover:bg-slate-50 transition-colors">
-                <div className="w-7 h-7 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center shrink-0">
-                  <Cpu className="w-4 h-4" />
+            {/* Business App Callout Banner */}
+            <div className="text-xs sm:text-[13px] font-medium text-blue-700 bg-blue-50/70 border border-blue-100 rounded-xl px-3.5 py-2.5 flex items-center gap-2.5 shadow-sm">
+              <span className="text-base shrink-0">📲</span>
+              <span>
+                Manage your orders through the <strong className="font-bold text-blue-800">ZipGo Business App</strong> — built for restaurants, SMEs & online sellers.
+              </span>
+            </div>
+
+            {/* 3 Feature Bullets (Exact from Mockup) */}
+            <div className="space-y-3 pt-1">
+              {/* Bullet 1 */}
+              <div className="flex items-start gap-3 p-1.5 rounded-xl hover:bg-slate-50 transition-colors">
+                <div className="w-8 h-8 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center shrink-0 text-base shadow-sm border border-blue-100/60">
+                  <span>🧑‍💼</span>
                 </div>
                 <div>
-                  <h4 className="text-xs font-bold text-slate-900">Smart Dispatch</h4>
-                  <p className="text-[11px] text-slate-500">AI-powered order allocation</p>
+                  <h4 className="text-xs sm:text-sm font-bold text-slate-900">100% Salaried Riders</h4>
+                  <p className="text-[11px] sm:text-xs text-slate-500 mt-0.5">Zone-assigned, committed — not gig workers chasing the next order</p>
                 </div>
               </div>
 
-              <div className="flex items-start gap-3 p-2 rounded-xl hover:bg-slate-50 transition-colors">
-                <div className="w-7 h-7 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center shrink-0">
-                  <MapPin className="w-4 h-4" />
+              {/* Bullet 2 */}
+              <div className="flex items-start gap-3 p-1.5 rounded-xl hover:bg-slate-50 transition-colors">
+                <div className="w-8 h-8 rounded-lg bg-red-50 text-red-600 flex items-center justify-center shrink-0 shadow-sm border border-red-100/60">
+                  <MapPin className="w-4 h-4 text-red-500" />
                 </div>
                 <div>
-                  <h4 className="text-xs font-bold text-slate-900">Live Visibility</h4>
-                  <p className="text-[11px] text-slate-500">Real-time tracking for you & your customers</p>
+                  <h4 className="text-xs sm:text-sm font-bold text-slate-900">Live Visibility</h4>
+                  <p className="text-[11px] sm:text-xs text-slate-500 mt-0.5">Real-time tracking for you & your customers</p>
                 </div>
               </div>
 
-              <div className="flex items-start gap-3 p-2 rounded-xl hover:bg-slate-50 transition-colors">
-                <div className="w-7 h-7 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center shrink-0">
-                  <BarChart3 className="w-4 h-4" />
+              {/* Bullet 3 */}
+              <div className="flex items-start gap-3 p-1.5 rounded-xl hover:bg-slate-50 transition-colors">
+                <div className="w-8 h-8 rounded-lg bg-emerald-50 text-emerald-600 flex items-center justify-center shrink-0 shadow-sm border border-emerald-100/60">
+                  <BarChart3 className="w-4 h-4 text-emerald-600" />
                 </div>
                 <div>
-                  <h4 className="text-xs font-bold text-slate-900">Performance Analytics</h4>
-                  <p className="text-[11px] text-slate-500">Data-driven insights for your business</p>
+                  <h4 className="text-xs sm:text-sm font-bold text-slate-900">Performance Analytics</h4>
+                  <p className="text-[11px] sm:text-xs text-slate-500 mt-0.5">Data-driven insights for your business</p>
                 </div>
               </div>
             </div>
 
-            {/* Action Buttons */}
+            {/* Action Buttons (Exact from Mockup) */}
             <div className="flex flex-col sm:flex-row items-stretch sm:items-start gap-3 pt-2">
               <button
                 onClick={onOpenGetApp}
-                className="bg-slate-950 hover:bg-slate-900 text-white font-bold px-6 py-3 rounded-xl shadow-md hover:shadow-xl transition-all flex items-center justify-center gap-2.5 text-sm group hover:scale-[1.02]"
+                className="bg-slate-950 hover:bg-slate-900 text-white font-bold px-6 py-3 rounded-xl shadow-md hover:shadow-xl transition-all flex items-center justify-center gap-2 text-sm group hover:scale-[1.02]"
               >
-                <span>Get App</span>
-                <Download className="w-4 h-4 group-hover:translate-y-0.5 transition-transform" />
+                <span>Get the Business App</span>
               </button>
 
               <a
                 href="#how-it-works"
-                className="bg-white text-slate-700 hover:text-slate-900 font-semibold px-6 py-3 rounded-xl border border-slate-300 transition-all flex items-center justify-center gap-2 text-sm hover:border-slate-400 shadow-sm hover:scale-[1.02]"
+                className="bg-white text-slate-800 hover:text-slate-950 font-bold px-6 py-3 rounded-xl border border-slate-300 transition-all flex items-center justify-center gap-2 text-sm hover:border-slate-400 shadow-sm hover:scale-[1.02]"
               >
-                <div className="w-5 h-5 rounded-full border-2 border-slate-700 flex items-center justify-center">
-                  <Play className="w-2.5 h-2.5 fill-slate-700 text-slate-700 ml-0.5" />
-                </div>
+                <Play className="w-3.5 h-3.5 fill-slate-800 text-slate-800" />
                 <span>See How It Works</span>
               </a>
             </div>
+
+            {/* Category Pills (Row of 4: Restaurants, SMEs, E-commerce, Couriers) */}
+            <div className="flex flex-wrap items-center gap-2 pt-2">
+              <a 
+                href="#solution-restaurant"
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-50 border border-slate-200 text-xs font-semibold text-slate-700 shadow-sm hover:bg-white hover:border-blue-400 hover:text-blue-600 transition-all"
+              >
+                <span>🍔</span>
+                <span>Restaurants</span>
+              </a>
+
+              <a 
+                href="#solutions"
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-50 border border-slate-200 text-xs font-semibold text-slate-700 shadow-sm hover:bg-white hover:border-blue-400 hover:text-blue-600 transition-all"
+              >
+                <span>💼</span>
+                <span>SMEs</span>
+              </a>
+
+              <a 
+                href="#solution-ecommerce"
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-50 border border-slate-200 text-xs font-semibold text-slate-700 shadow-sm hover:bg-white hover:border-blue-400 hover:text-blue-600 transition-all"
+              >
+                <span>🛍️</span>
+                <span>E-commerce</span>
+              </a>
+
+              <a 
+                href="#solution-courier"
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-50 border border-slate-200 text-xs font-semibold text-slate-700 shadow-sm hover:bg-white hover:border-blue-400 hover:text-blue-600 transition-all"
+              >
+                <span>🚚</span>
+                <span>Couriers</span>
+              </a>
+            </div>
+
           </div>
 
           {/* ===== RIGHT: REALISTIC HERO IMAGE + FLOATING PERFORMANCE CARD ===== */}
