@@ -1,7 +1,34 @@
-import React from 'react';
-import { ShieldCheck, Smartphone, Navigation, DollarSign, Leaf, Headphones, BarChart3, Download } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { ShieldCheck, Smartphone, Navigation, DollarSign, Leaf, Headphones, BarChart3, Download, Clock } from 'lucide-react';
+
+// Countdown target: 10 October 2026
+const LAUNCH_DATE = new Date('2026-10-10T00:00:00+05:00');
+
+function useCountdown(target) {
+  const getTimeLeft = () => {
+    const diff = target - new Date();
+    if (diff <= 0) return { days: 0, hours: 0, minutes: 0, seconds: 0, done: true };
+    return {
+      days: Math.floor(diff / (1000 * 60 * 60 * 24)),
+      hours: Math.floor((diff / (1000 * 60 * 60)) % 24),
+      minutes: Math.floor((diff / (1000 * 60)) % 60),
+      seconds: Math.floor((diff / 1000) % 60),
+      done: false
+    };
+  };
+
+  const [timeLeft, setTimeLeft] = useState(getTimeLeft);
+
+  useEffect(() => {
+    const timer = setInterval(() => setTimeLeft(getTimeLeft()), 1000);
+    return () => clearInterval(timer);
+  }, []);
+
+  return timeLeft;
+}
 
 export default function AppDownload({ onOpenGetApp }) {
+
   const whyUsFeatures = [
     {
       title: 'Reliable & On-Time',
@@ -34,6 +61,10 @@ export default function AppDownload({ onOpenGetApp }) {
       icon: BarChart3
     }
   ];
+
+  const { days, hours, minutes, seconds, done } = useCountdown(LAUNCH_DATE);
+
+  const pad = (n) => String(n).padStart(2, '0');
 
   return (
     <section className="py-24 bg-slate-50 text-slate-900 border-t border-slate-200">
@@ -83,6 +114,39 @@ export default function AppDownload({ onOpenGetApp }) {
                   Manage orders, track deliveries and grow your business on the go. Available for merchants and riders.
                 </p>
               </div>
+
+              {/* ===== COUNTDOWN TIMER: Launching 10 October 2026 ===== */}
+              {!done ? (
+                <div className="bg-slate-950 rounded-2xl p-4 space-y-3">
+                  <div className="flex items-center gap-2">
+                    <Clock className="w-3.5 h-3.5 text-blue-400" />
+                    <span className="text-xs font-bold text-blue-400 uppercase tracking-wider">App Launching In</span>
+                  </div>
+                  <div className="grid grid-cols-4 gap-2 text-center">
+                    {[
+                      { label: 'Days', value: pad(days) },
+                      { label: 'Hours', value: pad(hours) },
+                      { label: 'Mins', value: pad(minutes) },
+                      { label: 'Secs', value: pad(seconds) },
+                    ].map(({ label, value }) => (
+                      <div key={label} className="bg-slate-900 rounded-xl py-2.5 px-1 border border-slate-800">
+                        <div className="text-xl sm:text-2xl font-heading font-black text-white tabular-nums leading-none">
+                          {value}
+                        </div>
+                        <div className="text-[9px] text-slate-500 font-semibold uppercase mt-1">{label}</div>
+                      </div>
+                    ))}
+                  </div>
+                  <div className="text-center text-[11px] text-slate-500 font-medium">
+                    🚀 Official launch: <span className="text-white font-bold">10 October 2026</span>
+                  </div>
+                </div>
+              ) : (
+                <div className="bg-blue-600 rounded-2xl p-4 text-center space-y-1">
+                  <div className="text-lg font-heading font-black text-white">🎉 App is LIVE!</div>
+                  <div className="text-xs text-blue-100">ZipGo App is now available to download</div>
+                </div>
+              )}
 
               {/* Download Buttons */}
               <div className="flex flex-wrap items-center gap-3">
