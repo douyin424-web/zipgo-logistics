@@ -1,13 +1,35 @@
 import React, { useState } from 'react';
-import { Headphones, ShieldCheck, CreditCard, MapPin, Send, CheckCircle2, Facebook, Instagram, Linkedin, Youtube, Download } from 'lucide-react';
+import { Headphones, ShieldCheck, CreditCard, MapPin, Send, CheckCircle2, Facebook, Instagram, Linkedin, Youtube, ArrowRight, Loader2 } from 'lucide-react';
+import { sendForm, CONTACT_EMAIL } from '../lib/formsubmit';
+import { Link } from '../portal/router';
 
-export default function Footer({ onOpenContact, onOpenGetApp }) {
+export default function Footer({ onOpenContact }) {
   const [email, setEmail] = useState('');
   const [subscribed, setSubscribed] = useState(false);
 
-  const handleSubscribe = (e) => {
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
+
+  const handleSubscribe = async (e) => {
     e.preventDefault();
-    if (email) setSubscribed(true);
+    if (!email || loading) return;
+    setLoading(true);
+    setError('');
+
+    try {
+      await sendForm({
+        _subject: 'New ZipGo Newsletter Signup',
+        'Email': email,
+        'Source': 'Website footer newsletter',
+        'Submitted At': new Date().toLocaleString()
+      });
+      setSubscribed(true);
+    } catch (err) {
+      console.error('Newsletter signup error:', err);
+      setError('Could not subscribe right now. Please try again.');
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -28,11 +50,11 @@ export default function Footer({ onOpenContact, onOpenGetApp }) {
             </div>
             
             <button
-              onClick={onOpenGetApp}
+              onClick={onOpenContact}
               className="bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-black px-8 py-3.5 rounded-xl shadow-lg shadow-emerald-500/20 transition-all text-xs flex items-center gap-2 shrink-0 hover:scale-105"
             >
-              <span>Get App</span>
-              <Download className="w-4 h-4" />
+              <span>Get a Quote</span>
+              <ArrowRight className="w-4 h-4" />
             </button>
           </div>
 
@@ -86,6 +108,7 @@ export default function Footer({ onOpenContact, onOpenGetApp }) {
                 <img 
                   src="/zipgo-logo.png" 
                   alt="ZipGo Logistics Pakistan" 
+                  loading="lazy"
                   className="h-11 sm:h-12 w-auto object-contain"
                 />
                 <div className="logo-light-sweep-beam" />
@@ -171,9 +194,9 @@ export default function Footer({ onOpenContact, onOpenGetApp }) {
           <div className="space-y-3">
             <h4 className="text-xs font-bold text-white uppercase tracking-wider">Solutions</h4>
             <ul className="space-y-2 text-xs text-slate-400">
-              <li><a href="#solutions" className="hover:text-white transition-colors">Restaurant Delivery</a></li>
-              <li><a href="#solutions" className="hover:text-white transition-colors">E-commerce Logistics</a></li>
-              <li><a href="#solutions" className="hover:text-white transition-colors">Courier Services</a></li>
+              <li><a href="#solution-restaurant" className="hover:text-white transition-colors">Restaurant Delivery</a></li>
+              <li><a href="#solution-ecommerce" className="hover:text-white transition-colors">E-commerce Logistics</a></li>
+              <li><a href="#solution-courier" className="hover:text-white transition-colors">Courier Services</a></li>
               <li><a href="#solutions" className="hover:text-white transition-colors">Enterprise Solutions</a></li>
             </ul>
           </div>
@@ -184,7 +207,9 @@ export default function Footer({ onOpenContact, onOpenGetApp }) {
             <ul className="space-y-2 text-xs text-slate-400">
               <li><a href="#why-ev" className="hover:text-white transition-colors">About Us</a></li>
               <li><a href="#partners" className="hover:text-white transition-colors">Leadership Team</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Careers</a></li>
+              <li><Link to="/business" className="hover:text-white transition-colors">Business Portal</Link></li>
+              <li><Link to="/rider" className="hover:text-white transition-colors">Rider Portal</Link></li>
+              <li><a href={`mailto:${CONTACT_EMAIL}?subject=Careers%20at%20ZipGo`} className="hover:text-white transition-colors">Careers</a></li>
               <li><button onClick={onOpenContact} className="hover:text-white transition-colors">Contact Us</button></li>
             </ul>
           </div>
@@ -209,11 +234,14 @@ export default function Footer({ onOpenContact, onOpenGetApp }) {
                   />
                   <button
                     type="submit"
-                    className="absolute right-1.5 top-1.5 bottom-1.5 px-3 bg-emerald-500 hover:bg-emerald-400 text-slate-950 rounded-lg transition-colors flex items-center justify-center font-bold"
+                    disabled={loading}
+                    aria-label="Subscribe to newsletter"
+                    className="absolute right-1.5 top-1.5 bottom-1.5 px-3 bg-emerald-500 hover:bg-emerald-400 disabled:opacity-60 text-slate-950 rounded-lg transition-colors flex items-center justify-center font-bold"
                   >
-                    <Send className="w-3.5 h-3.5" />
+                    {loading ? <Loader2 className="w-3.5 h-3.5 animate-spin" /> : <Send className="w-3.5 h-3.5" />}
                   </button>
                 </div>
+                {error && <p role="alert" className="text-[11px] text-red-300">{error}</p>}
               </form>
             ) : (
               <div className="p-3 rounded-xl bg-blue-950/80 border border-blue-800/60 text-xs text-blue-300 flex items-center gap-2">
@@ -227,14 +255,8 @@ export default function Footer({ onOpenContact, onOpenGetApp }) {
 
         {/* Copyright Bar */}
         <div className="mt-12 pt-8 border-t border-slate-900 text-center text-xs text-slate-500 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <span>© 2025 ZipGo Logistics Pakistan. All rights reserved.</span>
-          <div className="flex items-center gap-4 text-slate-400 text-xs">
-            <a href="#" className="hover:text-white transition-colors">Privacy Policy</a>
-            <span>•</span>
-            <a href="#" className="hover:text-white transition-colors">Terms of Service</a>
-            <span>•</span>
-            <a href="#how-it-works" className="hover:text-white transition-colors">Security</a>
-          </div>
+          <span>© {new Date().getFullYear()} ZipGo Logistics Pakistan. All rights reserved.</span>
+          <a href={`mailto:${CONTACT_EMAIL}`} className="text-slate-400 hover:text-white transition-colors">{CONTACT_EMAIL}</a>
         </div>
 
       </div>

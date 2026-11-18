@@ -1,0 +1,40 @@
+# Local Oracle Database + ZipGo API for development.
+#   docker compose up -d
+# First start of the database takes a few minutes.
+services:
+  oracle:
+    image: gvenzl/oracle-free:23-slim
+    environment:
+      ORACLE_PASSWORD: ${ORACLE_ADMIN_PASSWORD:-AdminPass123}
+      APP_USER: zipgo
+      APP_USER_PASSWORD: ${ORACLE_PASSWORD:-ZipgoPass123}
+    ports:
+      - "1521:1521"
+    volumes:
+      - oracle-data:/opt/oracle/oradata
+    healthcheck:
+      test: ["CMD", "healthcheck.sh"]
+      interval: 15s
+      timeout: 10s
+      retries: 40
+
+  api:
+    build: .
+    depends_on:
+      oracle:
+        condition: service_healthy
+    environment:
+      NODE_ENV: development
+      PORT: 4000
+      DB_CLIENT: oracle
+      ORACLE_USER: zipgo
+      ORACLE_PASSWORD: ${ORACLE_PASSWORD:-ZipgoPass123}
+      ORACLE_CONNECT_STRING: oracle:1521/FREEPDB1
+      JWT_SECRET: ${JWT_SECRET:-local-dev-secret-change-me-local-dev-secret}
+      CORS_ORIGINS: http://localhost:5173
+      OTP_DEV_CODE: "123456"
+    ports:
+      - "4000:4000"
+
+volumes:
+  oracle-data:

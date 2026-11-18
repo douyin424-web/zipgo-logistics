@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { ChevronDown, Menu, X, Download, PhoneCall } from 'lucide-react';
+import { ChevronDown, Menu, X, PhoneCall, Store, Bike } from 'lucide-react';
+import { Link } from '../portal/router';
 
-export default function Navbar({ onOpenContact, onOpenGetApp }) {
+export default function Navbar({ onOpenContact }) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [solutionsOpen, setSolutionsOpen] = useState(false);
@@ -15,9 +16,15 @@ export default function Navbar({ onOpenContact, onOpenGetApp }) {
         setIsScrolled(false);
       }
     };
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  // Hover devices open on hover (click keeps it open); touch devices toggle on tap
+  const toggleDropdown = (setOpen) => {
+    const canHover = window.matchMedia('(hover: hover)').matches;
+    setOpen((open) => (canHover ? true : !open));
+  };
 
   const handleSolutionClick = (key) => {
     setSolutionsOpen(false);
@@ -67,7 +74,13 @@ export default function Navbar({ onOpenContact, onOpenGetApp }) {
             
             {/* Solutions Dropdown */}
             <div className="relative" onMouseEnter={() => setSolutionsOpen(true)} onMouseLeave={() => setSolutionsOpen(false)}>
-              <button className="flex items-center gap-1 hover:text-white transition-colors py-2">
+              <button
+                type="button"
+                onClick={() => toggleDropdown(setSolutionsOpen)}
+                aria-haspopup="true"
+                aria-expanded={solutionsOpen}
+                className="flex items-center gap-1 hover:text-white transition-colors py-2"
+              >
                 Solutions
                 <ChevronDown className={`w-4 h-4 text-zinc-500 transition-transform ${solutionsOpen ? 'rotate-180 text-blue-400' : ''}`} />
               </button>
@@ -117,14 +130,19 @@ export default function Navbar({ onOpenContact, onOpenGetApp }) {
 
             {/* Resources Dropdown */}
             <div className="relative" onMouseEnter={() => setResourcesOpen(true)} onMouseLeave={() => setResourcesOpen(false)}>
-              <button className="flex items-center gap-1 hover:text-white transition-colors py-2">
+              <button
+                type="button"
+                onClick={() => toggleDropdown(setResourcesOpen)}
+                aria-haspopup="true"
+                aria-expanded={resourcesOpen}
+                className="flex items-center gap-1 hover:text-white transition-colors py-2"
+              >
                 Resources
                 <ChevronDown className={`w-4 h-4 text-zinc-500 transition-transform ${resourcesOpen ? 'rotate-180 text-blue-400' : ''}`} />
               </button>
               {resourcesOpen && (
                 <div className="absolute top-full left-0 w-52 bg-zinc-950 border border-zinc-800 rounded-2xl shadow-2xl p-2 space-y-1 animate-fade-in-down">
-                  <a href="#how-it-works" className="block px-3 py-2 rounded-xl hover:bg-zinc-900 text-xs font-semibold text-zinc-200">Help Center</a>
-                  <a href="#how-it-works" className="block px-3 py-2 rounded-xl hover:bg-zinc-900 text-xs font-semibold text-zinc-200">API Documentation</a>
+                  <a href="#how-it-works" onClick={() => setResourcesOpen(false)} className="block px-3 py-2 rounded-xl hover:bg-zinc-900 text-xs font-semibold text-zinc-200">How It Works</a>
                   <a 
                     href="#rate-cards" 
                     onClick={(e) => { e.preventDefault(); handleRateCardsClick(); }}
@@ -141,18 +159,27 @@ export default function Navbar({ onOpenContact, onOpenGetApp }) {
 
           {/* Right CTA Button */}
           <div className="hidden md:flex items-center gap-3">
-            <button
-              onClick={onOpenGetApp}
-              className="bg-blue-600 hover:bg-blue-500 text-white text-xs font-bold px-6 py-2.5 rounded-xl shadow-lg shadow-blue-600/30 hover:shadow-blue-600/50 transition-all flex items-center gap-2 group hover:scale-[1.03]"
+            <Link
+              to="/rider"
+              className="hidden lg:flex bg-zinc-900 hover:bg-zinc-800 border border-zinc-700 text-white text-xs font-bold px-4 py-2.5 rounded-xl transition-all items-center gap-2"
             >
-              <span>Get App</span>
-              <Download className="w-4 h-4 group-hover:translate-y-0.5 transition-transform" />
-            </button>
+              <Bike className="w-4 h-4 text-emerald-400" />
+              <span>Rider Portal</span>
+            </Link>
+            <Link
+              to="/business"
+              className="bg-blue-600 hover:bg-blue-500 text-white text-xs font-bold px-4 py-2.5 rounded-xl shadow-lg shadow-blue-600/30 hover:shadow-blue-600/50 transition-all flex items-center gap-2 hover:scale-[1.03]"
+            >
+              <Store className="w-4 h-4" />
+              <span>Business Portal</span>
+            </Link>
           </div>
 
           {/* Mobile Menu Toggle */}
           <button 
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'}
+            aria-expanded={mobileMenuOpen}
             className="md:hidden text-white p-2 rounded-xl bg-zinc-900 border border-zinc-800"
           >
             {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -192,20 +219,29 @@ export default function Navbar({ onOpenContact, onOpenGetApp }) {
           <a href="#about-us" onClick={() => setMobileMenuOpen(false)} className="block font-semibold py-2 hover:text-white">About Us</a>
           <a href="#testimonials" onClick={() => setMobileMenuOpen(false)} className="block font-semibold py-2 hover:text-white">Clients</a>
           <a href="#partners" onClick={() => setMobileMenuOpen(false)} className="block font-semibold py-2 hover:text-white">Team</a>
-          <a href="#rate-cards" onClick={() => { setMobileMenuOpen(false); handleRateCardsClick(); }} className="block font-semibold py-2 hover:text-white">Rate Cards</a>
+          <a href="#how-it-works" onClick={() => setMobileMenuOpen(false)} className="block font-semibold py-2 hover:text-white">How It Works</a>
+          <a href="#rate-cards" onClick={(e) => { e.preventDefault(); handleRateCardsClick(); }} className="block font-semibold py-2 hover:text-white">Rate Cards</a>
           
           <div className="pt-3 border-t border-zinc-800 flex flex-col gap-2">
-            <button
-              onClick={() => { setMobileMenuOpen(false); onOpenGetApp(); }}
+            <Link
+              to="/business"
               className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-3 rounded-xl shadow-lg shadow-blue-600/30 flex items-center justify-center gap-2 text-xs"
             >
-              <Download className="w-4 h-4" />
-              <span>Get App</span>
-            </button>
+              <Store className="w-4 h-4" />
+              <span>Business Portal</span>
+            </Link>
+
+            <Link
+              to="/rider"
+              className="w-full bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold py-3 rounded-xl flex items-center justify-center gap-2 text-xs"
+            >
+              <Bike className="w-4 h-4" />
+              <span>Rider Portal</span>
+            </Link>
 
             <button
               onClick={() => { setMobileMenuOpen(false); onOpenContact(); }}
-              className="w-full bg-zinc-900 hover:bg-zinc-800 border border-zinc-800 text-white font-bold py-2.5 rounded-xl shadow flex items-center justify-center gap-2 text-xs"
+              className="w-full bg-zinc-900 hover:bg-zinc-800 border border-zinc-800 text-white font-bold py-2.5 rounded-xl flex items-center justify-center gap-2 text-xs"
             >
               <PhoneCall className="w-4 h-4" />
               <span>Contact Sales</span>

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ShoppingBag, UserCheck, Bike, Navigation, PackageCheck, ArrowRight, CheckCircle2, Sparkles } from 'lucide-react';
+import { ShoppingBag, UserCheck, Bike, Navigation, PackageCheck, CheckCircle2, Sparkles } from 'lucide-react';
 
 export default function HowItWorks() {
   const [activeStep, setActiveStep] = useState(0);
@@ -8,7 +8,7 @@ export default function HowItWorks() {
     {
       num: '1',
       title: 'Place Order',
-      desc: 'Place your delivery request in seconds via app, web dashboard or direct POS API.',
+      desc: 'Place your delivery request in seconds via web dashboard or direct POS API.',
       icon: ShoppingBag,
       accent: 'from-blue-500 to-cyan-400'
     },
@@ -83,6 +83,7 @@ export default function HowItWorks() {
                 <div 
                   key={idx}
                   onMouseEnter={() => setActiveStep(idx)}
+                  onClick={() => setActiveStep(idx)}
                   className={`bg-white rounded-3xl p-6 text-center space-y-4 transition-all duration-500 cursor-pointer border relative group ${
                     isActive 
                       ? 'border-blue-600 shadow-2xl scale-105 -translate-y-2' 

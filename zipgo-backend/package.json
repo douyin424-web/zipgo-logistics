@@ -1,0 +1,21 @@
+{
+  "name": "zipgo-backend",
+  "version": "1.0.0",
+  "private": true,
+  "description": "ZipGo Express API — business and rider portals, dispatch, live tracking (Oracle Database)",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node --experimental-sqlite src/server.js",
+    "dev": "node --experimental-sqlite --watch src/server.js",
+    "dev:sqlite": "node --experimental-sqlite --watch src/server.js --sqlite",
+    "schema:oracle": "node src/db/print-schema.js oracle > sql/oracle-schema.sql",
+    "test": "node --experimental-sqlite --test"
+  },
+  "engines": {
+    "node": ">=22.5.0"
+  },
+  "dependencies": {
+    "oracledb": "^6.6.0",
+    "ws": "^8.18.0"
+  }
+}

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Calculator, Zap, Flame, ArrowRight } from 'lucide-react';
+import { Zap, Flame, ArrowRight } from 'lucide-react';
 
 export default function CostComparison({ onOpenContact }) {
   const [distance, setDistance] = useState(15);

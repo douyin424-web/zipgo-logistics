@@ -6,7 +6,9 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview --port 3000 --host"
+    "preview": "vite preview --port 3000 --host",
+    "start": "node --experimental-sqlite zipgo-backend/src/server.js",
+    "postinstall": "cd zipgo-backend && npm install"
   },
   "dependencies": {
     "lucide-react": "^0.460.0",

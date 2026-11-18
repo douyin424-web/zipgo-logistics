@@ -1,0 +1,55 @@
+# ZipGo backend — live server.
+#   docker compose -f deploy/docker-compose.prod.yml --env-file deploy/.env.production up -d --build
+#
+# Two containers:
+#   api         the ZipGo backend (no port is opened to the internet)
+#   cloudflared the Cloudflare Tunnel: gives you https://api.yourdomain.com with a free HTTPS
+#               certificate and sends the traffic (including WebSocket) to the api container.
+#
+# The database is your Oracle Autonomous Database (see DEPLOY.md), so there is no database here.
+services:
+  api:
+    build: ..
+    restart: unless-stopped
+    environment:
+      NODE_ENV: production
+      PORT: 4000
+      DB_CLIENT: oracle
+      JWT_SECRET: ${JWT_SECRET}
+      CORS_ORIGINS: ${CORS_ORIGINS}
+      ORACLE_USER: ${ORACLE_USER}
+      ORACLE_PASSWORD: ${ORACLE_PASSWORD}
+      ORACLE_CONNECT_STRING: ${ORACLE_CONNECT_STRING}
+      ORACLE_WALLET_DIR: ${ORACLE_WALLET_DIR:-}
+      ORACLE_WALLET_PASSWORD: ${ORACLE_WALLET_PASSWORD:-}
+      WHATSAPP_TOKEN: ${WHATSAPP_TOKEN:-}
+      WHATSAPP_PHONE_NUMBER_ID: ${WHATSAPP_PHONE_NUMBER_ID:-}
+      WHATSAPP_MESSAGE_TYPE: ${WHATSAPP_MESSAGE_TYPE:-template}
+      WHATSAPP_TEMPLATE_NAME: ${WHATSAPP_TEMPLATE_NAME:-zipgo_login_code}
+      WHATSAPP_TEMPLATE_LANG: ${WHATSAPP_TEMPLATE_LANG:-en}
+      WHATSAPP_VERIFY_TOKEN: ${WHATSAPP_VERIFY_TOKEN:-}
+      WHATSAPP_APP_SECRET: ${WHATSAPP_APP_SECRET:-}
+    volumes:
+      # Oracle wallet folder (only needed if you use the wallet/mTLS connection)
+      - ./wallet:/app/wallet:ro
+    expose:
+      - "4000"
+    healthcheck:
+      test: ["CMD", "node", "-e", "fetch('http://localhost:4000/health').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+  tunnel:
+    image: cloudflare/cloudflared:latest
+    restart: unless-stopped
+    command: tunnel --no-autoupdate run
+    environment:
+      TUNNEL_TOKEN: ${TUNNEL_TOKEN}
+    depends_on:
+      - api

@@ -1,27 +1,24 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import StatsBar from './components/StatsBar';
+import Ticker from './components/Ticker';
+import Portals from './components/Portals';
 import Solutions from './components/Solutions';
 import HowItWorks from './components/HowItWorks';
 import CostComparison from './components/CostComparison';
 import RateCalculator from './components/RateCalculator';
-import AppDownload from './components/AppDownload';
+import WhyZipGo from './components/WhyZipGo';
 import Testimonials from './components/Testimonials';
 import Partners from './components/Partners';
 import Footer from './components/Footer';
 import ContactModal from './components/ContactModal';
-import GetAppModal from './components/GetAppModal';
 
 export default function App() {
   const [isContactOpen, setIsContactOpen] = useState(false);
-  const [isGetAppOpen, setIsGetAppOpen] = useState(false);
 
-  const handleOpenContact = () => setIsContactOpen(true);
-  const handleCloseContact = () => setIsContactOpen(false);
-
-  const handleOpenGetApp = () => setIsGetAppOpen(true);
-  const handleCloseGetApp = () => setIsGetAppOpen(false);
+  const handleOpenContact = useCallback(() => setIsContactOpen(true), []);
+  const handleCloseContact = useCallback(() => setIsContactOpen(false), []);
 
   // Global scroll observer for smooth animation across all sections
   useEffect(() => {
@@ -46,12 +43,14 @@ export default function App() {
     <div className="min-h-screen bg-white text-slate-900 font-sans selection:bg-blue-600 selection:text-white">
       
       {/* Navigation Header */}
-      <Navbar onOpenContact={handleOpenContact} onOpenGetApp={handleOpenGetApp} />
+      <Navbar onOpenContact={handleOpenContact} />
 
       {/* Main Content Sections with Animations */}
       <main>
         {/* Hero Section */}
-        <Hero onOpenContact={handleOpenContact} onOpenGetApp={handleOpenGetApp} />
+        <Hero onOpenContact={handleOpenContact} />
+
+        <Ticker />
 
         {/* 3 Solutions Card Ribbon */}
         <div className="scroll-reveal">
@@ -61,6 +60,11 @@ export default function App() {
         {/* Key Metrics Stats Bar */}
         <div className="scroll-reveal">
           <StatsBar />
+        </div>
+
+        {/* Business Portal & Rider Portal entry points */}
+        <div className="scroll-reveal">
+          <Portals />
         </div>
 
         {/* How ZipGo Works (5-Step Diagram) */}
@@ -78,9 +82,9 @@ export default function App() {
           <RateCalculator onOpenContact={handleOpenContact} />
         </div>
 
-        {/* Why Businesses Choose ZipGo & App Download Showcase */}
+        {/* Why Businesses Choose ZipGo & Quote Request Card */}
         <div className="scroll-reveal">
-          <AppDownload onOpenGetApp={handleOpenGetApp} />
+          <WhyZipGo onOpenContact={handleOpenContact} />
         </div>
 
         {/* Client Testimonials */}
@@ -93,13 +97,10 @@ export default function App() {
       </main>
 
       {/* Dark Navy Footer */}
-      <Footer onOpenContact={handleOpenContact} onOpenGetApp={handleOpenGetApp} />
+      <Footer onOpenContact={handleOpenContact} />
 
       {/* Interactive Sales Inquiry Modal */}
       <ContactModal isOpen={isContactOpen} onClose={handleCloseContact} />
-
-      {/* 10-Day Live Countdown Get App Modal */}
-      <GetAppModal isOpen={isGetAppOpen} onClose={handleCloseGetApp} />
 
     </div>
   );

@@ -1,0 +1,18 @@
+services:
+  - type: web
+    name: zipgo-express
+    env: node
+    plan: free
+    buildCommand: npm install && npm run build
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: DB_CLIENT
+        value: sqlite
+      - key: SQLITE_FILE
+        value: ./data/zipgo-dev.sqlite
+      - key: JWT_SECRET
+        generateValue: true
+      - key: OTP_DEV_CODE
+        value: "123456"

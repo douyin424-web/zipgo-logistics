@@ -13,7 +13,7 @@ export default function Solutions({ onOpenContact }) {
       title: 'Zone & distance pricing',
       description: "Quick order entry, live rider tracking to the customer's door, and a rate that's transparent by zone.",
       rate: 'Rs 17/km',
-      subrate: 'Below in-house petrol cost',
+      subrate: 'Average Rs 65 per delivery',
       icon: Utensils,
       popular: false,
       features: [
@@ -30,7 +30,7 @@ export default function Solutions({ onOpenContact }) {
       title: 'Volume-tiered rates',
       description: 'Bulk order upload or API integration. Rate drops automatically as your confirmed daily volume grows.',
       rate: 'Rs 62–105',
-      subrate: 'Per parcel by volume tier',
+      subrate: 'Per parcel by volume tier · average Rs 85',
       icon: ShoppingBag,
       popular: true,
       features: [
@@ -46,8 +46,8 @@ export default function Solutions({ onOpenContact }) {
       tag: 'COURIER',
       title: 'Committed-volume accounts',
       description: 'SLA-backed delivery with reporting built for downstream reconciliation and commitment tracking.',
-      rate: 'Enterprise Rate',
-      subrate: 'Negotiated SLA terms',
+      rate: 'From Rs 120',
+      subrate: 'Per shipment · enterprise SLA terms negotiated',
       icon: Truck,
       popular: false,
       features: [

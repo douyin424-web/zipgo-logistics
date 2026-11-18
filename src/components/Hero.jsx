@@ -1,10 +1,19 @@
 import React from 'react';
-import { Download, Play, Cpu, Eye, BarChart3, MapPin } from 'lucide-react';
+import { Play, BarChart3, MapPin, ArrowRight, Bike } from 'lucide-react';
+import { Link } from '../portal/router';
+import { Typewriter } from '../lib/motion';
 
-export default function Hero({ onOpenContact, onOpenGetApp }) {
+const TYPED_WORDS = ['Restaurants', 'SMEs', 'E-commerce', 'Couriers'];
+
+export default function Hero({ onOpenContact }) {
   return (
     <section className="relative pt-20 sm:pt-24 bg-white text-slate-900 overflow-hidden">
-      
+      {/* Slow floating glows behind the hero */}
+      <div aria-hidden="true" className="pointer-events-none absolute inset-0 overflow-hidden">
+        <div className="zg-orb zg-orb-a" />
+        <div className="zg-orb zg-orb-b" />
+      </div>
+
       {/* ===== MAIN HERO AREA ===== */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center min-h-[500px]">
@@ -20,23 +29,22 @@ export default function Hero({ onOpenContact, onOpenGetApp }) {
 
             {/* Main Headline (Single H1 for Google SEO) */}
             <h1 className="text-3xl sm:text-4xl lg:text-[42px] font-heading font-black tracking-tight text-slate-900 leading-[1.18]">
-              Delivery for Restaurants, <br />
-              SMEs & E-commerce — <br />
-              <span className="text-blue-600">Powered Entirely by EV</span>
+              <span className="sr-only">Delivery for Restaurants, SMEs & E-commerce — Powered Entirely by EV</span>
+              <span aria-hidden="true" className="block">
+                <span className="block">Delivery for</span>
+                <span className="block min-h-[1.18em] text-blue-600">
+                  <Typewriter words={TYPED_WORDS} />
+                </span>
+                <span className="block">
+                  Powered Entirely by <span className="text-emerald-500">EV</span>
+                </span>
+              </span>
             </h1>
             
             {/* Subparagraph */}
             <p className="text-sm sm:text-[15px] text-slate-600 leading-relaxed max-w-lg">
               Lahore's first commercial EV delivery fleet, with <strong className="text-slate-900 font-bold">100% salaried riders</strong> — <span className="text-slate-500">not gig workers</span> — and live tracking on every order.
             </p>
-
-            {/* Business App Callout Banner */}
-            <div className="text-xs sm:text-[13px] font-medium text-blue-700 bg-blue-50/70 border border-blue-100 rounded-xl px-3.5 py-2.5 flex items-center gap-2.5 shadow-sm">
-              <span className="text-base shrink-0">📲</span>
-              <span>
-                Manage your orders through the <strong className="font-bold text-blue-800">ZipGo Business App</strong> — built for restaurants, SMEs & online sellers.
-              </span>
-            </div>
 
             {/* 3 Feature Bullets (Exact from Mockup) */}
             <div className="space-y-3 pt-1">
@@ -75,13 +83,22 @@ export default function Hero({ onOpenContact, onOpenGetApp }) {
             </div>
 
             {/* Action Buttons (Exact from Mockup) */}
-            <div className="flex flex-col sm:flex-row items-stretch sm:items-start gap-3 pt-2">
-              <button
-                onClick={onOpenGetApp}
+            <div className="flex flex-col sm:flex-row sm:flex-wrap items-stretch sm:items-start gap-3 pt-2">
+              <Link
+                to="/business"
                 className="bg-slate-950 hover:bg-slate-900 text-white font-bold px-6 py-3 rounded-xl shadow-md hover:shadow-xl transition-all flex items-center justify-center gap-2 text-sm group hover:scale-[1.02]"
               >
-                <span>Get the Business App</span>
-              </button>
+                <span>Grow Your Business</span>
+                <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
+              </Link>
+
+              <Link
+                to="/rider"
+                className="bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold px-6 py-3 rounded-xl shadow-md hover:shadow-xl transition-all flex items-center justify-center gap-2 text-sm hover:scale-[1.02]"
+              >
+                <Bike className="w-4 h-4" />
+                <span>Join as Rider</span>
+              </Link>
 
               <a
                 href="#how-it-works"

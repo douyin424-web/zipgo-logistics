@@ -1,5 +1,7 @@
-import React, { useState } from 'react';
-import { X, Send, CheckCircle2, Zap, Phone, Building, MapPin, Package, Loader2 } from 'lucide-react';
+import React, { useEffect, useState } from 'react';
+import { X, Send, CheckCircle2, Zap, Loader2, AlertCircle } from 'lucide-react';
+import { sendForm, CONTACT_EMAIL } from '../lib/formsubmit';
+import useModal from '../lib/useModal';
 
 export default function ContactModal({ isOpen, onClose }) {
   const [submitted, setSubmitted] = useState(false);
@@ -15,46 +17,42 @@ export default function ContactModal({ isOpen, onClose }) {
     message: ''
   });
 
+  useModal(isOpen, onClose);
+
+  // Start with a fresh form state every time the modal opens
+  useEffect(() => {
+    if (isOpen) {
+      setSubmitted(false);
+      setError('');
+    }
+  }, [isOpen]);
+
   if (!isOpen) return null;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (loading) return;
     setLoading(true);
     setError('');
 
     try {
-      // Sends form data directly to contactzipgopk@gmail.com via FormSubmit AJAX
-      const response = await fetch('https://formsubmit.co/ajax/contactzipgopk@gmail.com', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json'
-        },
-        body: JSON.stringify({
-          _subject: `New EV Fleet Lead: ${formData.businessName || formData.name} (${formData.city})`,
-          _template: 'table',
-          _captcha: 'false',
-          'Full Name': formData.name,
-          'Business Name': formData.businessName,
-          'Business Type': formData.category,
-          'City': formData.city,
-          'Estimated Daily Orders': formData.dailyOrders,
-          'WhatsApp / Phone': formData.phone,
-          'Additional Requirements': formData.message || 'None provided',
-          'Submitted At': new Date().toLocaleString()
-        })
+      // Sends form data to the ZipGo inbox via FormSubmit AJAX
+      await sendForm({
+        _subject: `New EV Fleet Lead: ${formData.businessName || formData.name} (${formData.city})`,
+        'Full Name': formData.name,
+        'Business Name': formData.businessName,
+        'Business Type': formData.category,
+        'City': formData.city,
+        'Estimated Daily Orders': formData.dailyOrders,
+        'WhatsApp / Phone': formData.phone,
+        'Additional Requirements': formData.message || 'None provided',
+        'Submitted At': new Date().toLocaleString()
       });
-
-      if (response.ok) {
-        setSubmitted(true);
-      } else {
-        // Even if external service delays, show success to user so lead is not discouraged
-        setSubmitted(true);
-      }
+      setSubmitted(true);
     } catch (err) {
       console.error('Contact submission error:', err);
-      // Graceful fallback: show confirmation so user knows team will contact
-      setSubmitted(true);
+      // Tell the user honestly so the lead is not silently lost
+      setError(`We couldn't send your request. Please try again, or email us at ${CONTACT_EMAIL}.`);
     } finally {
       setLoading(false);
     }
@@ -68,12 +66,13 @@ export default function ContactModal({ isOpen, onClose }) {
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md animate-in fade-in">
-      <div className="bg-slate-900 border border-slate-800 rounded-3xl max-w-lg w-full p-6 sm:p-8 shadow-2xl relative text-white space-y-6">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md overflow-y-auto" role="dialog" aria-modal="true" aria-label="Request a rate quote">
+      <div className="bg-slate-900 border border-slate-800 rounded-3xl max-w-lg w-full p-6 sm:p-8 shadow-2xl relative text-white space-y-6 my-auto animate-pop-in">
         
         {/* Close Button */}
         <button 
-          onClick={onClose}
+          onClick={handleReset}
+          aria-label="Close"
           className="absolute top-5 right-5 text-slate-400 hover:text-white p-2 rounded-full hover:bg-slate-800 transition-colors"
         >
           <X className="w-5 h-5" />
@@ -188,12 +187,20 @@ export default function ContactModal({ isOpen, onClose }) {
                 />
               </div>
 
+              {error && (
+                <div role="alert" className="flex items-start gap-2 p-3 rounded-xl bg-red-950/60 border border-red-800/60 text-red-200">
+                  <AlertCircle className="w-4 h-4 shrink-0 mt-0.5" />
+                  <span>{error}</span>
+                </div>
+              )}
+
               <button
                 type="submit"
-                className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-3.5 rounded-xl shadow-lg shadow-blue-600/30 transition-all flex items-center justify-center gap-2 text-sm"
+                disabled={loading}
+                className="w-full bg-blue-600 hover:bg-blue-500 disabled:opacity-60 disabled:cursor-not-allowed text-white font-bold py-3.5 rounded-xl shadow-lg shadow-blue-600/30 transition-all flex items-center justify-center gap-2 text-sm"
               >
-                <span>Submit Rate Quote Request</span>
-                <Send className="w-4 h-4" />
+                <span>{loading ? 'Sending...' : 'Submit Rate Quote Request'}</span>
+                {loading ? <Loader2 className="w-4 h-4 animate-spin" /> : <Send className="w-4 h-4" />}
               </button>
             </form>
           </>

@@ -1,4 +1,5 @@
 import React from 'react';
+import { CountUp } from '../lib/motion';
 
 export default function StatsBar() {
   const stats = [
@@ -23,7 +24,7 @@ export default function StatsBar() {
               }`}
             >
               <div className={`text-4xl sm:text-5xl lg:text-6xl font-heading font-black tracking-tight text-transparent bg-clip-text bg-gradient-to-r ${stat.color} drop-shadow-sm`}>
-                {stat.value}
+                <CountUp value={stat.value} />
               </div>
               <div className="text-xs sm:text-sm font-bold text-zinc-300 tracking-wide uppercase group-hover:text-white transition-colors">
                 {stat.label}

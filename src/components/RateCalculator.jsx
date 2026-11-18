@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Calculator, ArrowRight, DollarSign, TrendingUp, CheckCircle, FileText, Sparkles, Shield, Clock, Zap } from 'lucide-react';
+import { Calculator, ArrowRight, CheckCircle, FileText, Sparkles } from 'lucide-react';
 
 export default function RateCalculator({ onOpenContact }) {
   const [activeTab, setActiveTab] = useState('pricing'); // 'pricing' or 'rate-cards'
@@ -35,7 +35,8 @@ export default function RateCalculator({ onOpenContact }) {
       title: "Restaurant Delivery",
       badge: "Food & Beverage",
       price: "Rs 65",
-      unit: "/ delivery",
+      unit: "/ delivery (average)",
+      note: "Billed at Rs 17 per km",
       popular: true,
       features: [
         "Under 4-minute rider dispatch",
@@ -50,7 +51,8 @@ export default function RateCalculator({ onOpenContact }) {
       title: "E-Commerce Fulfillment",
       badge: "Brands & Retailers",
       price: "Rs 85",
-      unit: "/ parcel",
+      unit: "/ parcel (average)",
+      note: "Rs 62–105 by volume tier",
       popular: false,
       features: [
         "Same-day & scheduled next-day delivery",
@@ -64,8 +66,9 @@ export default function RateCalculator({ onOpenContact }) {
     {
       title: "Corporate & Express Courier",
       badge: "Enterprises & Offices",
-      price: "Rs 120",
+      price: "From Rs 120",
       unit: "/ shipment",
+      note: "Enterprise SLA terms negotiated",
       popular: false,
       features: [
         "Intra-city priority point-to-point",
@@ -219,7 +222,7 @@ export default function RateCalculator({ onOpenContact }) {
                   <span className="font-mono text-red-400">PKR {monthlyPetrolSpend.toLocaleString()}</span>
                 </div>
                 <div className="flex justify-between text-slate-400">
-                  <span>ZipGo EV Fleet Cost:</span>
+                  <span>ZipGo EV Fleet Cost (avg Rs {costPerOrderZipGo} / order):</span>
                   <span className="font-mono text-blue-400 font-bold">PKR {monthlyZipGoSpend.toLocaleString()}</span>
                 </div>
                 <div className="flex justify-between text-white font-bold pt-1 border-t border-slate-900">
@@ -281,9 +284,12 @@ export default function RateCalculator({ onOpenContact }) {
                       <h3 className="text-xl font-heading font-bold text-white">{card.title}</h3>
                     </div>
 
-                    <div className="flex items-baseline gap-1.5 pb-4 border-b border-slate-800">
-                      <span className="text-4xl font-heading font-black text-white">{card.price}</span>
-                      <span className="text-xs font-medium text-slate-400">{card.unit}</span>
+                    <div className="pb-4 border-b border-slate-800 space-y-1.5">
+                      <div className="flex flex-wrap items-baseline gap-1.5">
+                        <span className="text-3xl sm:text-4xl font-heading font-black text-white">{card.price}</span>
+                        <span className="text-xs font-medium text-slate-400">{card.unit}</span>
+                      </div>
+                      <div className="text-xs font-semibold text-blue-300">{card.note}</div>
                     </div>
 
                     <ul className="space-y-3">

@@ -77,6 +77,7 @@ export default function Testimonials() {
                     <img
                       src={client.logo}
                       alt={client.name}
+                      loading="lazy"
                       className="h-full w-full object-contain group-hover:scale-105 transition-transform duration-300"
                     />
                   </div>
@@ -129,6 +130,7 @@ export default function Testimonials() {
                   <img
                     src={rev.logo}
                     alt={rev.company}
+                    loading="lazy"
                     className="h-full w-full object-contain"
                   />
                 </div>

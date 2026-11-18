@@ -36,6 +36,7 @@ function PartnerCard({ image, name, role, tag, bio, icon: Icon, delay = 0, initi
             <img
               src={image}
               alt={name}
+              loading="lazy"
               className={`h-full w-full ${objectFit} group-hover:scale-105 transition-transform duration-700`}
             />
           ) : (
